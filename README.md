@@ -9,7 +9,7 @@ desired coupling constant sqrt(alpha) [lengthscale], simply do**
 (also see python3 Generate_EDGB_Strain.py -h for help)
 
 Note that this takes a while because a spline interpolant must be
-build for each mode.
+built for each mode.
 
 This will generate a directory
 
