@@ -23,7 +23,7 @@ def ReadExtrapolatedMode(p, piece, mode, sqrt_alpha=None):
   result = re + 1j*im
   return time, result
 
-def ComputeEDGBModifiedStrain(p, mode, l):
+def ComputeEDGBModifiedStrain(p, mode, sqrt_alpha):
   """ Given a value of the EDGB coupling constant l, a path 
       p to the extrapolated hPsi4 compute the modified gravitational wave strain """
 
@@ -32,8 +32,8 @@ def ComputeEDGBModifiedStrain(p, mode, l):
   delta_time, delta_strain = ReadExtrapolatedMode(p, "DeltaStrain", mode)
 
   ## Now add the strain and delta strain together
-  ## with the correct value of l
-  total = strain + l**4 * delta_strain
+  ## with the correct value of sqrt_alpha
+  total = strain + sqrt_alpha**4 * delta_strain
 
   return time, total
 
