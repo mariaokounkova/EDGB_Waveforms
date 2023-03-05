@@ -10,8 +10,8 @@ import os
 def ReadExtrapolatedMode(p, piece, mode):
   """ Given a file of extrapolated modes, read in the (mode)
       at a given order """
-  piece_dict = {"Delta" : "rMDeltaPsi4_Asymptotic_GeometricUnits.h5", \
-          "Background" : "rMPsi4_Asymptotic_GeometricUnits.h5"}
+  piece_dict = {"Delta" : "DeltaPsi4.h5", \
+          "Background" : "BackgroundPsi4.h5"}
   file = p + piece_dict[piece]
   l = mode[0]
   m = mode[1]
@@ -27,8 +27,6 @@ def ComputeEDGBPsi4(p, mode, sqrt_alpha):
   ## Read in the background
   time, strain = ReadExtrapolatedMode(p, "Background", mode)
   delta_time, delta_strain = ReadExtrapolatedMode(p, "Delta", mode)
-  print(time[-6:])
-  print(delta_time[-6:])
 
   ## Now add the strain and delta strain together
   ## with the correct value of sqrt_alpha
@@ -50,82 +48,14 @@ def OutputEDGBPsi4(p, sqrt_alpha):
     
     grp = fOut.create_group("Extrapolated_N2.dir")
     
-    ### Compute for only (2,2) modes
-    #if only22:
-    #  print("Computing for (2,2) mode only")
-
-    #  modes = [(2, -2), (2,2)]
-    #  for mode in modes:
-    #    l = mode[0]
-    #    m = mode[1]
-    #    print("Computing for ", mode)
-    #    time, total = ComputeEDGBModifiedStrain(p, mode, sqrt_alpha)
-    #    ## Compute for the given mode
-    #    dataset = grp.create_dataset("Y_l"+str(l)+"_m"+str(m)+".dat", \
-    #    (len(time),3), dtype='f')
-
-    #    dataset[:,0] = time
-    #    dataset[:,1] = np.real(total)
-    #    dataset[:,2] = np.imag(total)
-
-    #  ## For all other modes
-    #  l_arr = range(2, 9)
-    #  for l in l_arr:
-    #    print("Computing for l = ", l)
-
-    #    for m in range(-l, l+1):
-    #      mode = (l, m)
-    #      if mode not in modes:
-    #        print("Setting zero for ", mode)
-    #        dataset = grp.create_dataset("Y_l"+str(l)+"_m"+str(m)+".dat", \
-    #        (len(time),3), dtype='f')
-
-    #        dataset[:,0] = np.zeros_like(time)
-    #        dataset[:,1] = np.zeros_like(time)
-    #        dataset[:,2] = np.zeros_like(time)
-            
-    ## All modes except m = 0
-    #elif dropm0:
-    #    print("Computing for all modes except m = 0")
-    #
-    #    l_arr = range(2, 9)
-
-    #    for l in l_arr:
-    #        print("Computing for l = ", l)
-
-    #        for m in range(-l, l+1):
-    #        
-    #            mode = (l, m)
-    #    
-    #            if m != 0:
-    #                ## Compute the mode if not m = 0
-    #                time, total = ComputeEDGBModifiedStrain(p, mode, sqrt_alpha)
-
-    #                dataset = grp.create_dataset("Y_l"+str(l)+"_m"+str(m)+".dat", \
-    #                (len(time),3), dtype='f')
-
-    #                dataset[:,0] = time
-    #                dataset[:,1] = np.real(total)
-    #                dataset[:,2] = np.imag(total)
-    #        
-    #            else:
-    #                ## Set to zero if m = 0 
-    #                print("Setting zero for ", mode)
-    #                dataset = grp.create_dataset("Y_l"+str(l)+"_m"+str(m)+".dat", \
-    #                (len(time),3), dtype='f')
-
-    #                dataset[:,0] = np.zeros_like(time)
-    #                dataset[:,1] = np.zeros_like(time)
-    #                dataset[:,2] = np.zeros_like(time)
-        
     ## Compute for all of the modes
     print("Computing for all of the modes")
-    l_arr = [2] ##range(2, 9)
+    l_arr = range(2, 9)
 
     for l in l_arr:
         print("Computing for l = ", l)
 
-        for m in [2]: ##range(-l, l+1):
+        for m in range(-l, l+1):
             mode = (l, m)
             print(mode)
 
