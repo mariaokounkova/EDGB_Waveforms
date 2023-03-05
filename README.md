@@ -2,9 +2,9 @@ This repository includes the scripts that you need to generate and analyze your 
 
 ### Generating waveforms 
 
-In order to do this, you must have a directory `[Waveform_dir]` which contains both `rPsi4_FiniteRadii_CodeUnits.h5` (our `BackgroundPsi4`) and `rDeltaPsi4_FiniteRadii_CodeUnits.h5` (our `DeltaPsi4`)(you can contact me to get these for a given binary black hole configuration). These will then be combined to give you the EdGB-modified waveform as 
+In order to do this, you must have a directory `[Waveform_dir]` which contains both `BackgroundPsi4.h5` (our "Background Psi4") and `DeltaPsi4.h5` (our "Delta Psi4")(you can contact me to get these for a given binary black hole configuration). These will then be combined to give you the EdGB-modified waveform as (see Eq. 13 in https://arxiv.org/pdf/2001.03571.pdf)
 
-`EdGBStrain = BackgroundPsi4 + sqrt_alpha^4 DeltaPsi4`
+`BackgroundPsi4 + sqrt_alpha^4 DeltaPsi4`
 
 In order to do this, use `Generate_EDGB_Psi4.py` as 
 
