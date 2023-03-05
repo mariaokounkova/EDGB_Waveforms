@@ -32,6 +32,14 @@ def SubtractPeakTimeMode(time, data):
   t_peak = GetPeakTimeMode(time, data)
   return time - t_peak
 
+def InterpolateTimes(time, data, time_dest):
+    """ Interpolates time, data onto new time axis
+        time_dest """
+    ## build the interpolant only in the region where we need it
+    ## time, data = CutTimes(time, data, min(time_dest), max(time_dest))
+    interpolant = scipy.interpolate.CubicSpline(time, data)
+    return interpolant(time_dest)
+
 def DeltaPsi4Factor(hPsi4, B = 0.1):
     """ Given DeltaPsi4 
 
@@ -59,7 +67,8 @@ def ReadExtrapolatedMode(p, piece, mode = [2,2]):
   except: file = p + piece
   l = mode[0]
   m = mode[1]
-  f = h5py.File(file, 'r')
+  f = h5py.File(file, 'r')['Extrapolated_N2.dir']
+  print(f.keys())
   data = f['Y_l' + str(l) + '_m'  + str(m) + '.dat']
   time, re, im = data[:,0], data[:,1], data[:,2]
   result = re + 1j*im
