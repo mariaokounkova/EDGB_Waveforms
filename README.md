@@ -15,9 +15,9 @@ In order to do this, use `Generate_EDGB_Psi4.py` as
 
 This will give you a file like `EDGB_Psi4_**.h5` in `[Waveform_dir]` where `**` represents the value of `sqrt_alpha`, as a string (so `sqrt_alpha = 0.01` will give `EDGB_Psi4_0p01.h5`). This is your EdGB-modified waveform that you can now analyze! 
 
-### Analyzing waveforms
+### Analyzing and plotting waveforms
 
-To analyze the resulting waveforms, see the notebook
+To analyze and plot the resulting waveforms, see the notebook
 
 `AnalyzeEDGBWaveforms.ipynb`
 
